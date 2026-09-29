@@ -35,9 +35,9 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 |---|---|---|---|
 | 01 | Intake | Whose is this, and is it one ticket? | — |
 | 02 | Map | What actually exists, hop by hop? | — |
-| 03 | Build | Which files does this kind of change touch? | — |
+| 03 | Build | Which files does this kind of change touch? | [`03-build`](recipes/03-build.md) |
 | 04 | Prove | Would the tests fail if the code were wrong? | [`04-prove`](recipes/04-prove.md) |
-| 05 | Gate | Does one command say yes, with no job allowed to stay red? | — |
+| 05 | Gate | Does one command say yes, with no job allowed to stay red? | [`05-gate`](recipes/05-gate.md) |
 | 06 | Review | Can the reviewer check it in the order they read? | — |
 | 07 | Land | Is it on main, and is everything around it still true? | [`07-land`](recipes/07-land.md) |
 | 08 | Release | Is it running where users are, and how far behind is prod? | — |
