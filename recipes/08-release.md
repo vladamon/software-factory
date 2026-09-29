@@ -97,9 +97,10 @@ prod:     not yet: prod PR drafted, waits for the word.
   merging, and on a collision check what each artifact contains.
 - **The bot that stopped coming.** The dispatch that raises the environment bump failed on an expired
   token for three chart releases in a row. No PR arrived and nothing alerted. → Step 6.
-- **The posture that changed twice.** In one week an environment moved from a moving `main` tag to
-  pinned versions, then back to the moving tag. The rule file kept describing the pinned posture,
-  so anyone who trusted it would "ship" by bumping a pin the environment ignored. → Step 8: digests, not config.
+- **The posture that kept changing.** In three weeks an environment moved from a moving `main` tag
+  to pinned versions, back to the moving tag, then to exact production pins for a release rehearsal.
+  Both the rule file and the agent's memory described an earlier posture, so anyone who trusted
+  them would "ship" by bumping a pin the environment ignored. → Step 8: digests, not config.
 - **Ready but empty.** An API came up during a rollout before its message bus's DNS existed. It failed
   the bind once, kept running with a nil reader (the readiness probe couldn't see it), and returned 503 on one endpoint
   until restarted. → Step 9: exercise the user path.

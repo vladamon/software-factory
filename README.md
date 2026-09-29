@@ -33,7 +33,7 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 
 | # | Station | Question | Recipe |
 |---|---|---|---|
-| 01 | Intake | Whose is this, and is it one ticket? | — |
+| 01 | Intake | Whose is this, and is it one ticket? | [`01-intake`](recipes/01-intake.md) |
 | 02 | Map | What actually exists, hop by hop? | — |
 | 03 | Build | Which files does this kind of change touch? | [`03-build`](recipes/03-build.md) |
 | 04 | Prove | Would the tests fail if the code were wrong? | [`04-prove`](recipes/04-prove.md) |

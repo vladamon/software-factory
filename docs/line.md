@@ -14,7 +14,7 @@ through Prove, Gate and Land, it just passes through quickly.
 
 | # | Station | In | Out | Seeded by |
 |---|---|---|---|---|
-| 01 | **Intake** | A shaped brief | Tickets, one per layer, each with an owner; the chain explicit in the tracker | Feature owner goes end to end, layer expert reviews; cross layers only on work you specified and can verify; an answer that implies work ends as a ticket |
+| 01 | **Intake** | A shaped brief | Tickets, one per layer, each with an owner; the chain explicit in the tracker | [Recipe](../recipes/01-intake.md) |
 | 02 | **Map** | Tickets | What exists today, hop by hop; the area's design doc read or written | The map is a deliverable; contract first, design doc as its own PR; read the decision behind a precedent before copying it |
 | 03 | **Build** | A ticket + map | A branch in its own worktree, touching every file its change shape lists | [Recipe](../recipes/03-build.md) |
 | 04 | **Prove** | A branch | Tests shown to fail against the breaks they claim to catch | [Recipe](../recipes/04-prove.md) |
