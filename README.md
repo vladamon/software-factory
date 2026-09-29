@@ -40,7 +40,7 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 | 05 | Gate | Does one command say yes, with no job allowed to stay red? | [`05-gate`](recipes/05-gate.md) |
 | 06 | Review | Can the reviewer check it in the order they read? | [`06-review`](recipes/06-review.md) |
 | 07 | Land | Is it on main, and is everything around it still true? | [`07-land`](recipes/07-land.md) |
-| 08 | Release | Is it running where users are, and how far behind is prod? | — |
+| 08 | Release | Is it running where users are, and how far behind is prod? | [`08-release`](recipes/08-release.md) |
 | 09 | Ratchet | What did this teach, and where does that go? | [`09-ratchet`](recipes/09-ratchet.md) |
 
 A recipe is written once its practice has run on at least two real changes. A dash means the practice

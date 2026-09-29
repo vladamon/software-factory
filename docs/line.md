@@ -21,7 +21,7 @@ through Prove, Gate and Land, it just passes through quickly.
 | 05 | **Gate** | A proven branch | One command green on a named sha, plus the suites it skips run by hand | [Recipe](../recipes/05-gate.md) |
 | 06 | **Review** | A green branch | Approval on *this* sha; every follow-up a ticket | [Recipe](../recipes/06-review.md) |
 | 07 | **Land** | An approved PR | On main, stack retargeted, tracker in the right state, all verified by reading back | [Recipe](../recipes/07-land.md) |
-| 08 | **Release** | Commits on main | Running where users are, verified by digest; distance to prod known | A merge can never deploy prod; each hop waits for the previous artifact; merged is not shipped |
+| 08 | **Release** | Commits on main | Running where users are, verified by digest; distance to prod known | [Recipe](../recipes/08-release.md) |
 | 09 | **Ratchet** | An incident, anywhere | A rule, a gate, or a deletion | [Recipe](../recipes/09-ratchet.md) |
 
 The handoff from `product-dev-os` is its `product:build` brief (`readiness: ready`) and its
