@@ -1,0 +1,70 @@
+# Software factory
+
+How a shaped piece of work becomes a verified, released change when agents do most of the typing.
+It is written from one engineer's practice across a UI, a Go backend, databases and a Helm/Pulumi
+release chain on a small team, and kept product-agnostic so it runs on any repo that fills in a profile.
+
+Every rule here caused a real problem once before it was written down. Anything that sounds like general
+advice but never caused a problem doesn't belong here.
+
+## Where it sits
+
+| Repo | Question | Relation |
+|---|---|---|
+| [`product-dev-os`](https://github.com/vladamon/product-dev-os) | *What* to build, and whether to | Upstream. Its `product:build` brief is the factory's intake. |
+| **`software-factory`** | *How* a shaped change is built, proven, landed and released | This repo. |
+| `harness-optimisation` (private) | How well the agent harness runs (context, tokens, subagents) | Tunes the machine; the factory tunes the line. |
+| A product repo's `CLAUDE.md` | How *this* repo does it | The **profile**: the factory applied to one repo. |
+
+## The idea in three rules
+
+1. **Procedure is generic; the profile is local.** Recipes here never name a repo, a command or a
+   person. Each repo's `CLAUDE.md` carries the same headings (`templates/profile.md`), and the recipes
+   read the gate command, the change shapes and the release chain from there.
+2. **The ratchet only turns one way.** A problem becomes a rule. A rule that has a signature becomes a
+   gate. A rule the code made unnecessary gets deleted. Quality rises while agents do the typing,
+   because nothing depends on anyone remembering.
+3. **Agents act; humans authorise what leaves the room.** Three tiers, written down:
+   [`docs/authority.md`](docs/authority.md).
+
+## The line
+
+Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`](docs/line.md).
+
+| # | Station | Question | Recipe |
+|---|---|---|---|
+| 01 | Intake | Whose is this, and is it one ticket? | — |
+| 02 | Map | What actually exists, hop by hop? | — |
+| 03 | Build | Which files does this kind of change touch? | — |
+| 04 | Prove | Would the tests fail if the code were wrong? | [`04-prove`](recipes/04-prove.md) |
+| 05 | Gate | Does one command say yes, with no job allowed to stay red? | — |
+| 06 | Review | Can the reviewer check it in the order they read? | — |
+| 07 | Land | Is it on main, and is everything around it still true? | [`07-land`](recipes/07-land.md) |
+| 08 | Release | Is it running where users are, and how far behind is prod? | — |
+| 09 | Ratchet | What did this teach, and where does that go? | [`09-ratchet`](recipes/09-ratchet.md) |
+
+A recipe is written once its practice has run on at least two real changes. A dash means the practice
+exists but its recipe hasn't been extracted yet.
+
+## Layout
+
+| Path | What it holds |
+|---|---|
+| `docs/conventions.md` | The contract: recipe shape, profile headings, generic vs local, how rules get in and out. |
+| `docs/line.md` | The stations, what enters and leaves each, and what the line measures. |
+| `docs/authority.md` | What an agent does alone, on the word, and never. |
+| `recipes/` | One file per station. The authoritative procedure. |
+| `templates/` | `profile.md` (a repo's `CLAUDE.md` skeleton), `pr-body.md`. |
+
+Skills (`factory:*`) come after the recipes they run, as in `product-dev-os`: improve the recipe and
+the skill improves with it.
+
+## Status
+
+Started 2026-09-29 from a harvest of 96 rules across one product's repos. 75 of them turned out to be
+generic procedure and 15 stayed as repo profile. The rest went to the harness or the design system.
+Nothing on the line has been measured yet; `docs/line.md` lists what will be.
+
+## License
+
+MIT
