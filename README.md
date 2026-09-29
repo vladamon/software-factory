@@ -34,7 +34,7 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 | # | Station | Question | Recipe |
 |---|---|---|---|
 | 01 | Intake | Whose is this, and is it one ticket? | [`01-intake`](recipes/01-intake.md) |
-| 02 | Map | What actually exists, hop by hop? | — |
+| 02 | Map | What actually exists, hop by hop? | [`02-map`](recipes/02-map.md) |
 | 03 | Build | Which files does this kind of change touch? | [`03-build`](recipes/03-build.md) |
 | 04 | Prove | Would the tests fail if the code were wrong? | [`04-prove`](recipes/04-prove.md) |
 | 05 | Gate | Does one command say yes, with no job allowed to stay red? | [`05-gate`](recipes/05-gate.md) |
@@ -43,8 +43,8 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 | 08 | Release | Is it running where users are, and how far behind is prod? | [`08-release`](recipes/08-release.md) |
 | 09 | Ratchet | What did this teach, and where does that go? | [`09-ratchet`](recipes/09-ratchet.md) |
 
-A recipe is written once its practice has run on at least two real changes. A dash means the practice
-exists but its recipe hasn't been extracted yet.
+A recipe is written once its practice has run on at least two real changes. Every station now has
+one; the next step is measuring the line (`docs/line.md`, *Measures*), then thin `factory:*` skills.
 
 ## Layout
 
@@ -63,7 +63,7 @@ the skill improves with it.
 
 Started 2026-09-29 from a harvest of 96 rules across one product's repos. 75 of them turned out to be
 generic procedure and 15 stayed as repo profile. The rest went to the harness or the design system.
-Nothing on the line has been measured yet; `docs/line.md` lists what will be.
+All nine recipes written 2026-09-29. Nothing on the line has been measured yet; `docs/line.md` lists what will be.
 
 ## License
 
