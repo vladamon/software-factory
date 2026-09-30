@@ -25,7 +25,10 @@ Every merge. For stacks, every merge in the stack, one at a time.
 2. **Re-check shared sequence numbers.** Fetch, and compare the branch's migration numbers (or version
    pins, or anything numbered by hand) against main's latest. Renumber on collision and say so in the
    commit.
-3. **Merge.**
+3. **Merge the sha that was checked.** Pass the head sha to the merge call (the REST merge endpoint
+   takes `sha`), so a push that lands between your last look and the merge makes the merge fail instead
+   of shipping unchecked commits. A script that waits for CI waits until every required check *by name*
+   has appeared and finished; "nothing pending" is also true before the slow checks have registered.
 4. **Prove it landed.** `git fetch`, then `git grep <a symbol the PR added> origin/main`. The merge
    button isn't proof.
 5. **Set tracker state after automations fire.** PR-open and merge automations change ticket state a
@@ -38,7 +41,10 @@ Merge the **bottom** PR only. Then, for its direct child:
 6. **Don't delete the base branch with the merge.** Delete it only after the child is retargeted
    (step 9).
 7. **Rebase the child on main.** The squash rewrote the base's commits; the child still carries the
-   originals.
+   originals, and a plain rebase replays them as conflicts against their own squashed copy. Drop them:
+   `git rebase --onto origin/main <old base head> <child>`, then push with `--force-with-lease`.
+   A generated file in conflict (a lockfile, a baseline, a snapshot) is taken from main and regenerated,
+   never merged by hand.
 8. **Retarget explicitly** to main, through the API if the CLI's edit command is unreliable (see the
    profile).
 9. **Read back the child's base** (`baseRefName`). Only when it says `main`, delete the old base
@@ -65,6 +71,7 @@ old base deleted. ticket → Done (read back ✓).
 
 ## Done means
 
+- The merge was pinned to the head sha, after every required check had run on it.
 - The PR's own symbol greps on `origin/main`.
 - Every child in the stack reads `baseRefName: main` and has a green gate on its new head.
 - The tracker state was read back after the automations fired.
@@ -89,3 +96,9 @@ old base deleted. ticket → Done (read back ✓).
   a second later by the PR-open automation. → Step 5.
 - **The approval from ten commits ago.** A PR merged on a stale approval carried ten unreviewed commits
   to main. → Step 1.
+- **The watcher that left early.** A script waiting for CI exited as soon as no check was pending. The
+  check list at that moment held only the fast jobs; end-to-end and performance hadn't registered yet.
+  → Step 3: wait for the required checks by name, and merge pinned to the head sha.
+- **The conflict with itself.** After the base of a three-PR stack was squash-merged, each child showed a
+  conflict in files it never touched: the base's original commits, replayed against their squashed copy.
+  `rebase --onto` past the old base head resolved all three cleanly. → Step 7.

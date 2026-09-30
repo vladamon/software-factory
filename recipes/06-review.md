@@ -70,6 +70,15 @@ sides: preparing a change so a review is fast and worth having, and reviewing so
     PR once no blocker remains; others keep the merge with the author. Either way the policy is written
     down, and an automated merge checks review state as well as CI (see `docs/authority.md`).
 
+### A sweep that cuts or rewrites
+
+16. **Review the combined diff of the whole sweep, against what was removed.** When a stack of PRs
+    shortens copy, deletes code paths or simplifies config, review each removed line for the one fact it
+    carried that nothing else says: a caveat on a figure, a warning, an edge case. Per-PR review misses
+    these because each cut looks reasonable on its own. Run it adversarially (an agent asked only "what
+    did the reader lose?") before the bottom PR merges, and grep the tests for every phrase you restore
+    or change.
+
 ## What good output looks like
 
 As author, the ask:
@@ -95,6 +104,7 @@ multi-tenant PR below it merges, because that one resolves differently depending
 - Every finding has an answer in its thread: fixed, disagreed with a reason, or deferred to a ticket.
 - Every follow-up is a ticket with an owner.
 - The approval is on the head sha, and the body states the reasoning that survived review.
+- For a sweep that removes, the combined diff was read for what the reader lost.
 
 ## Traps
 
@@ -112,3 +122,8 @@ multi-tenant PR below it merges, because that one resolves differently depending
   replicas, so every row was an orphan. Review found it; no test could have. → Step 13.
 - **The misdiagnosis in public.** A team message called a teammate's approval premature. The actual
   problem was CI being down for billing. → Diagnose (recipe 05, step 5) before attributing a failure to a person.
+- **The caveat that got shortened away.** Three stacked PRs cut explanatory UI text to fit a new length
+  cap, each reviewed and green. One pass over their combined diff, asking only what the reader lost,
+  found seven dropped caveats: among them that a delegated credential keeps acting until it's revoked,
+  and that a missing figure shows a dash, not a zero. All seven went back in, within the cap, before
+  anything merged. → Step 16.

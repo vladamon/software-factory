@@ -30,7 +30,9 @@ workflow, bot or person. This station walks the chain and checks each hop before
 
 ### Cut
 
-2. **Tag a tree that was gated.** The tag's commit is on main, and its tree is the one the gate passed
+2. **Claim the release, then tag a tree that was gated.** When more than one session or person can
+   release, read the shared log and ask whoever holds the release thread before tagging; two parallel
+   tags race on version numbers at every later hop. The tag's commit is on main, and its tree is the one the gate passed
    on: main's own CI run, or a PR head whose tree is byte-identical. Use annotated tags.
 3. **Verify the artifact, not the workflow.** Confirm the image or package exists in the registry under
    its tag and digest, for every architecture. When the release workflow fails *after* publishing (a
@@ -108,6 +110,13 @@ prod:     not yet: prod PR drafted, waits for the word.
   component that migrates it, and crash-looped against the old schema. → Step 7.
 - **Merged for weeks, shipped to nobody.** A backend ran 217 commits past its last release, and a whole
   product area built and merged in that time was visible only on staging. → Step 1, on a cadence.
+- **Two sessions, one release.** A sweep finished in one agent session while another session was mid-way
+  through a release of the same component. Checking its log first showed the sweep was already live on
+  staging through the moving tag, so the release went ahead once, from one place, instead of twice.
+  → Step 2.
+- **Same commit, different digest.** The release workflow rebuilt the tagged commit, so production's
+  image had a different digest from the build staging had been running for hours, from the same source.
+  → Step 8: compare against the release's digest, not the commit.
 - **Red after publish.** A release workflow failed at its final inspect step on a registry
   read-after-write lag, after the image had already published correctly. The image was checked by hand
   first, and only then was the failed job rerun. → Step 3.

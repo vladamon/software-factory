@@ -75,6 +75,16 @@ something. The procedure keeps it that way, both when running it and when changi
     rule that now says "enforced by `<job>`" (recipe 09).
 14. **Name it in the profile.** Add the job to the profile's gate list and to its precondition notes
     if it has any.
+15. **On old code, freeze the debt in a baseline that only goes down.** When the new rule already has
+    dozens of violations, don't fix them in the gate's PR and don't soften the rule. Commit a per-file
+    count of today's violations beside the gate. A file above its count fails. A file below its count
+    also fails, as stale, until the lower number is written down, so the gain can't be spent again. The
+    script that writes the baseline refuses to raise a number unless told to, explicitly. Land the
+    sanctioned alternative in the same PR: a rule that forbids a shape needs a place for what it displaces.
+16. **Pay the debt one module per PR.** Each sweep takes one module's entries off the baseline and
+    states the before and after counts. To list a module's violations, delete its entries locally and
+    run the gate. Sibling sweeps that touch the same baseline file conflict on neighbouring lines; the
+    PR that lands second takes main's file and regenerates it with the script, never merges it by hand.
 
 ## What good output looks like
 
@@ -90,7 +100,8 @@ ticketed with owner. Not rerun blind.
 - The gate ran whole on the pushed sha and its own exit status was read.
 - Every red job was classified, and none is waved off as "expected".
 - Any budget raise carries its measured sentence in the config comment.
-- A new gate hard-fails, ships with the rule it enforces, and is listed in the profile.
+- A new gate hard-fails, ships with the rule it enforces, and is listed in the profile. On old code,
+  its baseline can only go down.
 
 ## Traps
 
@@ -115,3 +126,8 @@ ticketed with owner. Not rerun blind.
 - **The clean merge that broke a test.** A rename on main merged into a branch with no conflict marker.
   The production code compiled, and only the test file broke. `build` passed; the full gate caught it.
   A behaviour change on main is worse, because not even the gate catches it. → Step 4, including the re-read.
+- **The rule with 94 existing violations.** A length cap on explanatory UI text was decided while 94 text
+  slots already broke it. The gate landed with a per-file baseline and a disclosure component for the
+  text it pushed out, and three module sweeps took the count to 30 without the rule ever being relaxed.
+  Two of the sweeps conflicted on adjacent keys of the sorted baseline file, and regenerating it from
+  main resolved it in one command. → Steps 15 and 16.
