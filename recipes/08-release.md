@@ -1,4 +1,4 @@
-# 08 — Release
+# 08 · Release
 
 Is it running where users are, and how far behind is prod?
 

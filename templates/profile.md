@@ -1,4 +1,4 @@
-# <repo> — conventions for agents and humans
+# <repo>: conventions for agents and humans
 
 <!-- The factory profile. Headings are fixed: recipes refer to them by name. Keep each section to rules
      that caused a real problem once; delete a line when the code makes it unnecessary. No state (PR

@@ -1,4 +1,4 @@
-# 04 — Prove
+# 04 · Prove
 
 Would the tests fail if the code were wrong?
 
@@ -77,3 +77,9 @@ all ran, all passed, on <sha>.
 - **The gate that does not run it.** The pre-push gate type-checks the integration tests but doesn't
   run them, and CI runs them only when certain paths change. A green PR hid a storage test that never ran.
   → Step 7.
+- **The exemption that swallowed the rule.** A copy lint allowed one legitimate use of a glyph (alone
+  in a table cell, as the no-value mark) and defined "alone" as "nothing but whitespace around it". A
+  separator literal joining two interpolations (`${a} — ${b}`) is also nothing but whitespace around
+  the glyph, so four real violations passed as exempt, and a reviewer found them by reading the code, not
+  by the gate. → A gate with an exemption gets step 2 twice: once against the break, and once against
+  the nearest case the exemption must *not* cover.

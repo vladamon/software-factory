@@ -1,4 +1,4 @@
-# 05 — Gate
+# 05 · Gate
 
 Does one command say yes, with no job allowed to stay red?
 

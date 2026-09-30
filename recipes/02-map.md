@@ -1,4 +1,4 @@
-# 02 — Map
+# 02 · Map
 
 What actually exists, hop by hop?
 

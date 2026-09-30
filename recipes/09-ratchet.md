@@ -1,4 +1,4 @@
-# 09 — Ratchet
+# 09 · Ratchet
 
 What did this teach, and where does that go?
 
@@ -79,3 +79,9 @@ recipe:   04-prove → Traps → "The stale artifact."
 - **Learning a codebase's rules from scratch.** The fastest source of a codebase's unwritten rules turned out
   to be its reviewer's merged PRs and review comments: each comment is a trap that already happened.
   → When joining a repo, harvest the reviewer's history into the profile before the first PR.
+- **The voice the agent copied.** A product's copy carried over two hundred em dashes in the strings
+  users read, most of them drafted with an agent. The agent's own rule files and skills were full of the
+  same dash: it wrote the way it read. A one-off rewrite would have grown back within weeks. → A style
+  rule with a signature is a gate like any other (step 1, top row), and the files the agent reads
+  (profile, short-form design file, skills, templates) are cleaned in the same PR, because they are
+  the rule's input, not its documentation.

@@ -1,4 +1,4 @@
-# 03 — Build
+# 03 · Build
 
 Which files does this kind of change touch?
 

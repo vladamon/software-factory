@@ -37,7 +37,7 @@ is a repo the factory can't run on yet. That's fine, as long as it's stated.
 ## 3. Recipe shape
 
 ```markdown
-# NN — Station
+# NN · Station
 
 The question this station answers, in one line.
 

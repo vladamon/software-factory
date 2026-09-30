@@ -1,4 +1,4 @@
-# 07 — Land
+# 07 · Land
 
 Is it on main, and is everything around it still true?
 

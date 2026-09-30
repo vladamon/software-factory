@@ -1,4 +1,4 @@
-# 06 — Review
+# 06 · Review
 
 Can the reviewer check it in the order they read?
 
