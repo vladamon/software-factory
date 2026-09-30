@@ -44,8 +44,8 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 | 09 | Ratchet | What did this teach, and where does that go? | [`09-ratchet`](recipes/09-ratchet.md) |
 
 A recipe is written once its practice has run on at least two real changes. Every station now has
-one, and `scripts/line-audit.py` measures the line (`docs/line.md`, *Measures*). Next: thin
-`factory:*` skills, justified by the numbers.
+one, and `scripts/line-audit.py` measures the line (`docs/line.md`, *Measures*). Skills follow the
+numbers: the first is `factory:release`.
 
 ## Layout
 
@@ -56,10 +56,17 @@ one, and `scripts/line-audit.py` measures the line (`docs/line.md`, *Measures*).
 | `docs/authority.md` | What an agent does alone, on the word, and never. |
 | `recipes/` | One file per station. The authoritative procedure. |
 | `templates/` | `profile.md` (a repo's `CLAUDE.md` skeleton), `pr-body.md`. |
+| `skills/` | One directory per `factory:*` skill; each is a thin runner over its recipe. |
+| `.claude-plugin/` | Plugin and marketplace manifests. |
 | `scripts/` | `line-audit.py`: lead time, review wait, in-flight, red rate and release distance from the code host. |
 
 Skills (`factory:*`) come after the recipes they run, as in `product-dev-os`: improve the recipe and
-the skill improves with it.
+the skill improves with it. The repo is a Claude Code plugin (`factory`, marketplace
+`software-factory-local`); add it as a directory marketplace and enable `factory@software-factory-local`.
+
+| Skill | Runs | Chosen because |
+|---|---|---|
+| [`factory:release`](skills/release/SKILL.md) | [`08-release`](recipes/08-release.md): `status`, `cut`, `walk`, `verify` | The first line audit put the longest wait between merge and release |
 
 ## Status
 

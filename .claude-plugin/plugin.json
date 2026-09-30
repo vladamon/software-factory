@@ -1,0 +1,18 @@
+{
+  "name": "factory",
+  "version": "0.1.0",
+  "description": "Software factory: how a shaped change is built, proven, landed and released when agents do most of the typing. Each skill runs one station's recipe against the repo's profile (its CLAUDE.md).",
+  "author": {
+    "name": "Vladimir Cutkovic",
+    "url": "https://github.com/vladamon/software-factory"
+  },
+  "homepage": "https://github.com/vladamon/software-factory",
+  "license": "MIT",
+  "keywords": [
+    "software-delivery",
+    "release",
+    "ci",
+    "agents",
+    "engineering-process"
+  ]
+}

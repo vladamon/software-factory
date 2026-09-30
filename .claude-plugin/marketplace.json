@@ -1,0 +1,15 @@
+{
+  "name": "software-factory-local",
+  "description": "Software factory: station recipes for agent-built changes, run as factory:* skills",
+  "owner": {
+    "name": "vladamon",
+    "url": "https://github.com/vladamon/software-factory"
+  },
+  "plugins": [
+    {
+      "name": "factory",
+      "source": "./",
+      "description": "Station recipes for agent-built changes, run as factory:* skills"
+    }
+  ]
+}
