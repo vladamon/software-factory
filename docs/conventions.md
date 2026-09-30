@@ -79,6 +79,23 @@ acts on it.
 Memory has the same rule on a smaller scale. An index line is a hook that decides whether to open the
 file. It isn't a status report.
 
+**State has to reach the machine the next session runs on.** Rules travel with the repo; the agent's
+memory doesn't, because it is local to one machine. An engineer who moves between a travel laptop,
+a desk machine and occasionally a work machine found each one acting on its own, older state. So memory
+gets its own carrier: one private store for every project's memory, synced by the harness's own session
+hooks (pull at start, push at stop and end) plus a manual sync before switching machines. Three
+details decided whether it worked:
+
+- **Copy, don't link.** The agent keeps its usual memory path and a script copies both ways around the
+  pull. A link into the store fails quietly on a machine without the clone; a copy can be previewed.
+- **Keep a manifest of what the last sync saw.** Without it, a file missing locally could be "deleted
+  here" or "added elsewhere, not pulled yet", and a fresh machine's first sync deletes everything.
+- **Merge the index by union.** The index is the one file every machine appends to, so both sides'
+  lines survive. A real conflict (the same fact edited on two machines) pushes nothing and is reported
+  at the next session start.
+
+The store holds internal names, so it is private whatever the code's visibility is, and never this repo.
+
 ## 7. Evidence
 
 A change the line produces carries its own evidence in the PR body: the break/caught-by table (recipe 04),

@@ -27,6 +27,11 @@ was given for. It doesn't carry over to the next one, including follow-ups to th
   voice (tone, length, how requests are phrased) belongs in the profile, because it belongs to the team.
 - **Stop only your own processes.** Killing by process name matches every server of that kind,
   including the developer's own dev servers. Stop a process by the port you started it on, and only that one.
+- **Memory leaving the machine is on the word.** An agent that built a memory-sync store tried to
+  make its first push to the remote itself and was stopped: memory carries internal names and people,
+  and sending it off the machine is outward. The person made the first push and switched on the sync
+  hooks. From then on the hooks the person installed carry it; that setup is the written policy
+  (below) that moves this one line to *alone*.
 - **Before deleting, write down how to undo it.** Remote branch deletions leave no local trace. Record
   branch, sha and PR number first, and restore from the PR's permanent ref (`refs/pull/<N>/head`).
 
