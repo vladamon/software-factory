@@ -14,7 +14,11 @@ advice but never caused a problem doesn't belong here.
 | [`product-dev-os`](https://github.com/vladamon/product-dev-os) | *What* to build, and whether to | Upstream. Its `product:build` brief is the factory's intake. |
 | **`software-factory`** | *How* a shaped change is built, proven, landed and released | This repo. |
 | `harness-optimisation` (private) | How well the agent harness runs (context, tokens, subagents) | Tunes the machine; the factory tunes the line. |
+| `machine-setup` (private) | Can any machine become the working one in one command? | Installs both plugins and the rule files, clones every repo. |
+| `personal-field-manual` (private) | What am I getting good at, and where is the proof? | Sets direction; takes the others' output as dated evidence. |
 | A product repo's `CLAUDE.md` | How *this* repo does it | The **profile**: the factory applied to one repo. |
+
+How the five fit together, what passes between them and the rules they share: [`docs/system.md`](docs/system.md).
 
 ## The idea in three rules
 
@@ -51,6 +55,7 @@ numbers: the first is `factory:release`.
 
 | Path | What it holds |
 |---|---|
+| `docs/system.md` | The five repos as one system: departments, what passes between them, the shared rules. |
 | `docs/conventions.md` | The contract: recipe shape, profile headings, generic vs local, how rules get in and out. |
 | `docs/line.md` | The stations, what enters and leaves each, and what the line measures. |
 | `docs/authority.md` | What an agent does alone, on the word, and never. |
