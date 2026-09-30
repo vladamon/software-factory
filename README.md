@@ -44,7 +44,8 @@ Nine stations. Each asks one question; each has one recipe. See [`docs/line.md`]
 | 09 | Ratchet | What did this teach, and where does that go? | [`09-ratchet`](recipes/09-ratchet.md) |
 
 A recipe is written once its practice has run on at least two real changes. Every station now has
-one; the next step is measuring the line (`docs/line.md`, *Measures*), then thin `factory:*` skills.
+one, and `scripts/line-audit.py` measures the line (`docs/line.md`, *Measures*). Next: thin
+`factory:*` skills, justified by the numbers.
 
 ## Layout
 
@@ -55,6 +56,7 @@ one; the next step is measuring the line (`docs/line.md`, *Measures*), then thin
 | `docs/authority.md` | What an agent does alone, on the word, and never. |
 | `recipes/` | One file per station. The authoritative procedure. |
 | `templates/` | `profile.md` (a repo's `CLAUDE.md` skeleton), `pr-body.md`. |
+| `scripts/` | `line-audit.py`: lead time, review wait, in-flight, red rate and release distance from the code host. |
 
 Skills (`factory:*`) come after the recipes they run, as in `product-dev-os`: improve the recipe and
 the skill improves with it.
@@ -63,7 +65,7 @@ the skill improves with it.
 
 Started 2026-09-29 from a harvest of 96 rules across one product's repos. 75 of them turned out to be
 generic procedure and 15 stayed as repo profile. The rest went to the harness or the design system.
-All nine recipes written 2026-09-29. Nothing on the line has been measured yet; `docs/line.md` lists what will be.
+All nine recipes written 2026-09-29. The line was first measured on 2026-09-30, across five repos.
 
 ## License
 

@@ -30,15 +30,28 @@ doesn't enter the line.
 
 ## Measures
 
-Nothing below is measured yet. The first audit sets a baseline for each number, and after that a
-recipe change is justified by the number it moves, the same loop `harness-optimisation` uses.
+The first audit sets a baseline for each number, and after that a recipe change is justified by the
+number it moves, the same loop `harness-optimisation` uses. `scripts/line-audit.py` measures the rows
+marked *script* from the code host alone; the rest need the tracker or the deploy repo.
 
-| Measure | Station | Why it matters |
-|---|---|---|
-| Lead time: ticket opened → merged → staging → prod | whole line | Shows where the time goes; the build step is rarely where it goes |
-| Review wait: ready → first review | 06 | When agents build fast, this becomes the constraint |
-| PRs in flight per person | 03–07 | Too much work in flight is what makes stacks fall over |
-| Red rate per gate job | 05 | A job red most of the time is ignored even when it's right |
-| Defects found after merge | 04, 05 | What the proofs and gates let through |
-| Commits on main not yet released | 08 | "Merged" features users can't see |
-| Rules added and deleted per week | 09 | A ratchet that only adds rules is really an accumulating pile |
+| Measure | Station | How | Why it matters |
+|---|---|---|---|
+| Lead time: opened → merged → released | whole line | script | Shows where the time goes; the build step is rarely where it goes |
+| Lead time: released → each environment | 08 | deploy repo | Differs per profile: a pin bump, a moving tag, a dispatch |
+| Review wait: ready → first review, and PRs merged with none | 06 | script | When agents build fast, this becomes the constraint |
+| PRs in flight per person | 03–07 | script | Too much work in flight is what makes stacks fall over |
+| Red rate per gate job on main | 05 | script | A job red most of the time is ignored even when it's right |
+| Defects found after merge | 04, 05 | tracker; red on main is the script's proxy | What the proofs and gates let through |
+| Commits on main not yet released | 08 | script | "Merged" features users can't see |
+| Rules added and deleted per week | 09 | `git log` on the profile and recipes | A ratchet that only adds rules is really an accumulating pile |
+
+```
+scripts/line-audit.py owner/app owner/api owner/charts --days 30          # Markdown to stdout
+scripts/line-audit.py owner/app --json > audit.json                      # for diffing two audits
+```
+
+It reads through the `gh` CLI and writes nothing but a cache of immutable reads (completed runs,
+compares between published releases) under `~/.cache/line-audit`, so a weekly rerun pays only for
+what is new. A cold 30-day audit of five active repos costs a few thousand REST requests, out of the
+same hourly budget every other session on the account uses; the script stops while 1,000 remain.
+Its numbers are the baseline's, never the profile's: they are state, and go to the audit log.
