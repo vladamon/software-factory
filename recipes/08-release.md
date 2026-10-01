@@ -26,7 +26,9 @@ workflow, bot or person. This station walks the chain and checks each hop before
 
 1. **Measure what's waiting.** Per component, count the commits on main since the last release tag and
    list the user-visible changes among them. A feature that's merged but unreleased is invisible to
-   users and can't be verified by them.
+   users and can't be verified by them. Main is releasable at every commit ([`docs/trunk.md`](../docs/trunk.md)),
+   so a release can go at any time. A release held back "until main is clean" means main is dirty, and
+   that incident is the thing to fix.
 
 ### Cut
 

@@ -39,6 +39,9 @@ package you touch and name the run in the PR body (recipe 04, step 7).
 
 - <layer>: reviewed by <role>. <Whose ground to review, not to lead.>
 - Merge policy: <who merges what, when; dated, with who agreed>.
+- Main is releasable (`docs/trunk.md`): flag mechanism <how a change ships dark>; dirty-main time box
+  <before revert>; who may revert <the merger; anyone after the time box>; where an incident is announced
+  <channel>. Dated, with who agreed.
 - Voice for drafts to the team: <tone>.
 
 ## Release chain

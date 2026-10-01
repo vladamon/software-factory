@@ -40,6 +40,7 @@ marked *script* from the code host alone; the rest need the tracker or the deplo
 | Lead time: released → each environment | 08 | deploy repo | Differs per profile: a pin bump, a moving tag, a dispatch |
 | Review wait: ready → first review, and PRs merged with none | 06 | script | When agents build fast, this becomes the constraint |
 | PRs in flight per person | 03–07 | script | Too much work in flight is what makes stacks fall over |
+| Dirty-main episodes, and time from first red to releasable again | 07 | script (runs on main); the incident log for unshippable merges | Main must be releasable at every commit (`trunk.md`); this is how long it wasn't |
 | Red rate per gate job on main | 05 | script | A job red most of the time is ignored even when it's right |
 | Defects found after merge | 04, 05 | tracker; red on main is the script's proxy | What the proofs and gates let through |
 | Commits on main not yet released | 08 | script | "Merged" features users can't see |

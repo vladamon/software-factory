@@ -41,8 +41,10 @@ Whenever work arrives:
 4. **Write the contract where the halves meet.** Field names, types, and what absent means (an
    explicit null and a reason, never a zero that looks like data). Get it agreed with the other half's
    owner before either side builds.
-5. **Set the landing order.** A UI control never lands before the endpoint it calls, unless it's behind
-   a flag that stays off until the endpoint ships. State the order in both tickets.
+5. **Set the landing order.** A UI control never lands before the endpoint it calls is *released*,
+   unless it's behind a flag that stays off in production until then. Merged in the other repo isn't
+   enough: production runs that repo's last release ([`docs/trunk.md`](../docs/trunk.md)). State the
+   order in both tickets.
 6. **Size each ticket to one PR.** About 5 to 20 files, or two working sessions. Anything bigger is
    several tickets that stack (store → CRUD → wire-up).
 

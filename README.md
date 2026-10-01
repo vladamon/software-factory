@@ -20,7 +20,7 @@ advice but never caused a problem doesn't belong here.
 
 How the five fit together, what passes between them and the rules they share: [`docs/system.md`](docs/system.md).
 
-## The idea in three rules
+## The idea in four rules
 
 1. **Procedure is generic; the profile is local.** Recipes here never name a repo, a command or a
    person. Each repo's `CLAUDE.md` carries the same headings (`templates/profile.md`), and the recipes
@@ -30,6 +30,9 @@ How the five fit together, what passes between them and the rules they share: [`
    because nothing depends on anyone remembering.
 3. **Agents act; humans authorise what leaves the room.** Three tiers, written down:
    [`docs/authority.md`](docs/authority.md).
+4. **Main is releasable at every commit.** A merge is either complete (its dependencies are already
+   released) or dark (behind a flag that is off in production). A dirty main is an incident the merger
+   owns until it's restored: [`docs/trunk.md`](docs/trunk.md).
 
 ## The line
 
@@ -58,6 +61,7 @@ numbers: the first is `factory:release`.
 | `docs/system.md` | The five repos as one system: departments, what passes between them, the shared rules. |
 | `docs/conventions.md` | The contract: recipe shape, profile headings, generic vs local, how rules get in and out. |
 | `docs/line.md` | The stations, what enters and leaves each, and what the line measures. |
+| `docs/trunk.md` | Main is releasable: when a merge is allowed, flags, and a dirty main as an incident. |
 | `docs/authority.md` | What an agent does alone, on the word, and never. |
 | `recipes/` | One file per station. The authoritative procedure. |
 | `templates/` | `profile.md` (a repo's `CLAUDE.md` skeleton), `pr-body.md`. |

@@ -10,6 +10,7 @@ someone's memory will be relearned by the next agent, at the same cost.
 
 - After anything took more than twenty minutes to understand.
 - After a review finding that a rule could have prevented.
+- After every dirty-main episode ([`docs/trunk.md`](../docs/trunk.md)): what broke, how long, revert or fix.
 - When a convention has just been decided (a naming rule, a format, a threshold).
 - On a cadence (weekly is enough): prune.
 
