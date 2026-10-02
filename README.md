@@ -62,6 +62,7 @@ numbers: the first is `factory:release`.
 | `docs/conventions.md` | The contract: recipe shape, profile headings, generic vs local, how rules get in and out. |
 | `docs/line.md` | The stations, what enters and leaves each, and what the line measures. |
 | `docs/trunk.md` | Main is releasable: when a merge is allowed, flags, and a dirty main as an incident. |
+| `docs/environments.md` | Proposal: which environments, one job each, deploy vs release vs enable, release on a schedule. |
 | `docs/authority.md` | What an agent does alone, on the word, and never. |
 | `recipes/` | One file per station. The authoritative procedure. |
 | `templates/` | `profile.md` (a repo's `CLAUDE.md` skeleton), `pr-body.md`. |

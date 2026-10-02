@@ -77,6 +77,8 @@ it lands (recipe 07, *A stack*).
 A main that is always releasable can be released often, and should be. Distance to production (recipe
 08, step 1) shrinks on its own. When releases are held back "until main is clean again", the hold is
 the symptom, and the dirty main is the cause to fix.
+Where main runs on its way to production, and what "released" means as opposed to "enabled":
+[`environments.md`](environments.md).
 
 ## Measured
 
