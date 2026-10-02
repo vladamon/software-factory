@@ -1,11 +1,11 @@
 # The system
 
-Five repositories, read as one factory for building digital products. This repo is the production
+Six repositories, read as one factory for building digital products. This repo is the production
 line. This file is the floor plan: what each department answers, what passes between them, and the
 rules they share. It holds structure only; what is in flight right now is state, and lives elsewhere
 (`conventions.md` §6).
 
-## Five departments
+## Six departments
 
 | Department | Repo | Answers | Visibility |
 |---|---|---|---|
@@ -14,12 +14,17 @@ rules they share. It holds structure only; what is in flight right now is state,
 | **Line** | `software-factory` (this repo) | How a shaped change is built, proven, landed and released. | public, plugin `factory` |
 | **Lab** | `harness-optimisation` | How well the agent harness and the line run, by the numbers. | private |
 | **Plant** | `machine-setup`, with a private memory store | Any machine becomes the working machine in one command. | private |
+| **Library** | `brain` | What do I understand, and where did I learn it? | private, Obsidian vault |
 
 The product repos sit at the end of the line. Each carries a **profile** (its `CLAUDE.md`, headings from
 `templates/profile.md`), which is the factory applied to that one repo.
 
-No department answers another's question. When a change doesn't fit one of the five questions, it
+No department answers another's question. When a change doesn't fit one of the six questions, it
 probably belongs in a product repo's profile or in memory.
+
+The library and memory are easy to confuse. Memory is work state (what is in flight, who waits on what) and
+is meant to go stale. The library is what stays true if I left the job tomorrow, so employer and client
+detail never enters it.
 
 ## What passes between them
 
@@ -31,6 +36,7 @@ flowchart LR
   product[Product repos<br/>+ profile]
   lab[Lab<br/>harness-optimisation]
   plant[Plant<br/>machine-setup]
+  library[Library<br/>brain]
 
   compass -- which problems are worth the time --> office
   office -- "brief (readiness: ready) + task plan" --> line
@@ -42,6 +48,12 @@ flowchart LR
   plant -- installs both plugins, rule files, clones every repo --> line
   line -- shipped work --> compass
   lab -- measured before and after --> compass
+  line -- lessons, distilled --> library
+  lab -- lessons, distilled --> library
+  compass -- what each proof taught --> library
+  library -- read before researching --> office
+  library -- read before researching --> line
+  plant -- clones it, links /save and the pull hook --> library
 ```
 
 | From | To | What passes | Where it is written down |
@@ -53,24 +65,26 @@ flowchart LR
 | Product repos | Lab | Transcripts, PR timings, CI runs, release distance | `scripts/line-audit.py`, the lab's scripts |
 | Lab | Line | A dated baseline; a recipe change is justified by the number it moves | `line.md`, *Measures* |
 | Lab | Plant | A setting, hook or habit to change, each backed by an audit | The lab's recipes |
-| Plant | Everything | Both plugins enabled, rule files linked, every repo cloned at the same path, memory synced | The plant's installer |
+| Plant | Everything | Both plugins enabled, rule files linked, every repo cloned at the same path, memory synced, the library cloned with `/save` linked | The plant's installer |
 | Line, Lab | Compass | Evidence: shipped work, and measured before-and-after | The manual's competency map |
+| Line, Lab, Compass | Library | A lesson that holds beyond one repo or job, distilled into one note, without employer detail | `/save`; the library's `AGENTS.md` |
+| Library | Every session | What is already understood, so agents build on it instead of re-researching | The global `CLAUDE.md` pointer, which the plant installs |
 
 ## One grammar
 
-The same few rules repeat in every department, and that repetition is what makes five repos one system.
-Anyone who learns them in one repo can read the other four.
+The same few rules repeat in every department, and that repetition is what makes six repos one system.
+Anyone who learns them in one repo can read the other five.
 
-| Rule | Compass | Drawing office | Line | Lab | Plant |
-|---|:-:|:-:|:-:|:-:|:-:|
-| **Recipes are the authority.** Process lives in `recipes/`; improve the recipe, not the runner. | ● | ● | ● | ● | docs |
-| **Skills are thin runners** over a recipe, shipped as a plugin. | | ● | ● | | installs |
-| **Gates refuse.** A missing input stops the run and names the fix. | rules | ● | ● | | doctor |
-| **Earned lines only.** A rule exists because something went wrong once, and goes when it stops applying. | ● | gates | ● | ● | ● |
-| **Dated, never rewritten.** A later decision supersedes by linking back. | ● | ● | traps | ● | |
-| **Evidence over claims.** A number, a link or a digest. | ● | ● | ● | ● | doctor |
-| **Generic here, local there.** Procedure in the repo, instance detail in a profile or a private file. | | ● | ● | ● | ● |
-| **Humans authorise what leaves the room** (`authority.md`). | ● | ● | ● | ● | loads it |
+| Rule | Compass | Drawing office | Line | Lab | Plant | Library |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|
+| **Recipes are the authority.** Process lives in `recipes/`; improve the recipe, not the runner. | ● | ● | ● | ● | docs | |
+| **Skills are thin runners** over a recipe, shipped as a plugin. | | ● | ● | | installs | `/save`, linked |
+| **Gates refuse.** A missing input stops the run and names the fix. | rules | ● | ● | | doctor | |
+| **Earned lines only.** A rule exists because something went wrong once, and goes when it stops applying. | ● | gates | ● | ● | ● | |
+| **Dated, never rewritten.** A later decision supersedes by linking back. | ● | ● | traps | ● | | |
+| **Evidence over claims.** A number, a link or a digest. | ● | ● | ● | ● | doctor | sources |
+| **Generic here, local there.** Procedure in the repo, instance detail in a profile or a private file. | | ● | ● | ● | ● | ● |
+| **Humans authorise what leaves the room** (`authority.md`). | ● | ● | ● | ● | loads it | ● |
 
 The plant loads `authority.md` into every session on the machine, so the three tiers apply in every
 repo, not only on the line.
@@ -105,3 +119,4 @@ The departments connected, in the order it happened over two days in September 2
 | Merged work users can't see yet | `/factory:release status` |
 | Something about the setup feels slow | An audit in the lab, before any change |
 | A month has passed | The compass's plan |
+| Something learned that should outlast the job | `/save`, into the library |
