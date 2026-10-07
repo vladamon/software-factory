@@ -11,8 +11,8 @@ an explicit place in the chain.
 
 Whenever work arrives:
 
-- a ready brief from upstream (`product-dev-os`'s `product:build` with `readiness: ready`, and its
-  `product:plan` tasks);
+- a ready brief from upstream (`product-dev-os`'s `product:build` with `readiness: ready`; its
+  `product:plan` tasks when the author ran one);
 - a meeting, a thread, or a customer report;
 - a review follow-up (recipe 06);
 - an answer you gave that implies work.
@@ -30,8 +30,11 @@ Whenever work arrives:
 1. **Send undecided questions back.** If the request still hides a product decision (which of two
    behaviours, whether to build it at all), it isn't ready for a ticket. Upstream, that's `product:shape`
    or a conversation with the decision owner. A ticket built on an open question gets built twice.
-2. **Take upstream acceptance verbatim.** A ready brief already carries appetite, done criteria and
-   no-gos. Copy them into the tickets rather than paraphrasing them.
+2. **Take upstream acceptance verbatim, ids included.** A ready brief already carries appetite, done
+   criteria and no-gos. Copy them into the tickets rather than paraphrasing them, and keep the brief's
+   ids (`DC1…`, `screen/state`) on each ticket's acceptance line, so Review can check every one by
+   name (recipe 06, step 12). A brief that comes with a `product:plan` is split along its tasks; one
+   without is split here, one ticket per layer.
 
 ### Split
 

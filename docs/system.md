@@ -59,7 +59,7 @@ flowchart LR
 | From | To | What passes | Where it is written down |
 |---|---|---|---|
 | Compass | Drawing office | Which problems are worth the time | The manual's plan |
-| Drawing office | Line | A shaped brief with `readiness: ready`, and its task plan | `product:build`, `product:plan`; station 01 here |
+| Drawing office | Line | A shaped brief with `readiness: ready` (done criteria carry `DC` ids), and its task plan when there is one | `product:build`, optionally `product:plan`; station 01 here |
 | Line | Product repos | A released change, verified on the running workloads | Recipe 08 |
 | Product repos | Line | The profile: gate command, change shapes, release chain | `templates/profile.md` |
 | Product repos | Lab | Transcripts, PR timings, CI runs, release distance | `scripts/line-audit.py`, the lab's scripts |

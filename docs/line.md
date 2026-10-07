@@ -24,8 +24,11 @@ through Prove, Gate and Land, it just passes through quickly.
 | 08 | **Release** | Commits on main | Running where users are, verified by digest; distance to prod known | [Recipe](../recipes/08-release.md) |
 | 09 | **Ratchet** | An incident, anywhere | A rule, a gate, or a deletion | [Recipe](../recipes/09-ratchet.md) |
 
-The handoff from `product-dev-os` is its `product:build` brief (`readiness: ready`) and its
-`product:plan` tasks. Intake turns each task into one ticket per layer. A brief with `readiness: blocked`
+The handoff from `product-dev-os` is its `product:build` brief (`readiness: ready`,
+`contract_version: 0`): done criteria with stable `DC` ids, screen states as `screen/state`, no-gos
+verbatim. Its `product:plan` tasks come along when the author ran one; they are optional at Intake,
+which splits along them when present and one ticket per layer when not. Review checks each `DC` id
+back (station 06). A brief with `readiness: blocked` does not enter the line. A brief with `readiness: blocked`
 doesn't enter the line.
 
 ## Measures

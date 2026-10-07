@@ -59,20 +59,25 @@ sides: preparing a change so a review is fast and worth having, and reviewing so
 
 11. **Read the teeth table, then test it.** Apply one of the listed breaks yourself, or one that isn't
     listed. "I mutated X and four tests failed" is a review; "tests look good" isn't.
-12. **Look for silent failure first.** Every error path: does it log or return, or does it become a
+12. **Check the brief's done criteria by id.** When the ticket came from a ready brief (`product:build`,
+    `contract_version: 0`), its acceptance line lists `DC` ids. For each id the PR claims, find the test
+    or the check that proves it and name it in the thread. An id with no check is a finding; a criterion
+    the body doesn't mention is a question (built, cut, or deferred to which ticket?). "Done criteria
+    met" without ids is not an answer.
+13. **Look for silent failure first.** Every error path: does it log or return, or does it become a
     plausible default? A `default:` branch, a "not found" on a decode error, a timeout that produces no
     wrong output and only a log line.
-13. **Ask how it runs in production.** Deployment mode, replica count, statelessness, the real transport.
+14. **Ask how it runs in production.** Deployment mode, replica count, statelessness, the real transport.
     An in-process test harness can't catch a bug that only exists across processes.
-14. **Stay on your ground.** Review with the depth your layer knowledge supports. On another expert's
+15. **Stay on your ground.** Review with the depth your layer knowledge supports. On another expert's
     ground, ask questions instead of prescribing.
-15. **Merge only as the profile's merge policy says.** Some repos let the reviewer merge a teammate's
+16. **Merge only as the profile's merge policy says.** Some repos let the reviewer merge a teammate's
     PR once no blocker remains; others keep the merge with the author. Either way the policy is written
     down, and an automated merge checks review state as well as CI (see `docs/authority.md`).
 
 ### A sweep that cuts or rewrites
 
-16. **Review the combined diff of the whole sweep, against what was removed.** When a stack of PRs
+17. **Review the combined diff of the whole sweep, against what was removed.** When a stack of PRs
     shortens copy, deletes code paths or simplifies config, review each removed line for the one fact it
     carried that nothing else says: a caveat on a figure, a warning, an edge case. Per-PR review misses
     these because each cut looks reasonable on its own. Run it adversarially (an agent asked only "what
@@ -104,6 +109,7 @@ multi-tenant PR below it merges, because that one resolves differently depending
 - Every finding has an answer in its thread: fixed, disagreed with a reason, or deferred to a ticket.
 - Every follow-up is a ticket with an owner.
 - The approval is on the head sha, and the body states the reasoning that survived review.
+- Every `DC` id on the ticket has a named check in the thread, or a decision: cut, or deferred to a ticket.
 - For a sweep that removes, the combined diff was read for what the reader lost.
 
 ## Traps
@@ -111,7 +117,7 @@ multi-tenant PR below it merges, because that one resolves differently depending
 - **The stale approval.** A PR was merged on an approval given ten commits earlier. The ten commits went
   to main unreviewed. → Step 9; Land checks approved sha against head (recipe 07).
 - **Merge on green, reused.** A one-off "merge when green" was reused by a script that checked CI only.
-  It merged a PR 41 minutes after the reviewer had written "not approving yet". → Step 15.
+  It merged a PR 41 minutes after the reviewer had written "not approving yet". → Step 16.
 - **The reasoning that was wrong.** A PR withheld a field from public payloads "because it carries
   content". Review showed the write path already deletes content keys. The real reason was identity:
   identity keys deliberately stay in that field so a storage default can match them. The key-level tests
@@ -119,11 +125,11 @@ multi-tenant PR below it merges, because that one resolves differently depending
   → Step 8.
 - **The bug the harness can't see.** Session tracking keyed on a per-connection object worked in every
   test, because the in-process transport keeps one connection. Production runs stateless across
-  replicas, so every row was an orphan. Review found it; no test could have. → Step 13.
+  replicas, so every row was an orphan. Review found it; no test could have. → Step 14.
 - **The misdiagnosis in public.** A team message called a teammate's approval premature. The actual
   problem was CI being down for billing. → Diagnose (recipe 05, step 5) before attributing a failure to a person.
 - **The caveat that got shortened away.** Three stacked PRs cut explanatory UI text to fit a new length
   cap, each reviewed and green. One pass over their combined diff, asking only what the reader lost,
   found seven dropped caveats: among them that a delegated credential keeps acting until it's revoked,
   and that a missing figure shows a dash, not a zero. All seven went back in, within the cap, before
-  anything merged. → Step 16.
+  anything merged. → Step 17.
