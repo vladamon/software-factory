@@ -118,5 +118,6 @@ The departments connected, in the order it happened over two days in September 2
 | A shaped change to build | Recipes 01 → 09 here |
 | Merged work users can't see yet | `/factory:release status` |
 | Something about the setup feels slow | An audit in the lab, before any change |
+| A day starts, or an evening session | The compass's `rhythm.md` |
 | A month has passed | The compass's plan |
 | Something learned that should outlast the job | `/save`, into the library |
