@@ -59,7 +59,7 @@ numbers: the first is `factory:release`.
 
 | Path | What it holds |
 |---|---|
-| `docs/system.md` | The six repos as one system: departments, what passes between them, the shared rules. |
+| `docs/system.md` | The seven repos as one system: departments, what passes between them, the shared rules. |
 | `docs/conventions.md` | The contract: recipe shape, profile headings, generic vs local, how rules get in and out. |
 | `docs/line.md` | The stations, what enters and leaves each, and what the line measures. |
 | `docs/trunk.md` | Main is releasable: when a merge is allowed, flags, and a dirty main as an incident. |

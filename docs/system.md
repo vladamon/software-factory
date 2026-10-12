@@ -1,11 +1,11 @@
 # The system
 
-Six repositories, read as one factory for building digital products. This repo is the production
+Seven repositories, read as one factory for building digital products. This repo is the production
 line. This file is the floor plan: what each department answers, what passes between them, and the
 rules they share. It holds structure only; what is in flight right now is state, and lives elsewhere
 (`conventions.md` §6).
 
-## Six departments
+## Seven departments
 
 | Department | Repo | Answers | Visibility |
 |---|---|---|---|
@@ -15,16 +15,21 @@ rules they share. It holds structure only; what is in flight right now is state,
 | **Lab** | `harness-optimisation` | How well the agent harness and the line run, by the numbers. | private |
 | **Plant** | `machine-setup`, with a private memory store | Any machine becomes the working machine in one command. | private |
 | **Library** | `brain` | What do I understand, and where did I learn it? | private, Obsidian vault |
+| **Grounds** | [`platform`](https://github.com/vladamon/platform) | Where do the products run, and can I rebuild it from nothing? | private |
 
 The product repos sit at the end of the line. Each carries a **profile** (its `CLAUDE.md`, headings from
 `templates/profile.md`), which is the factory applied to that one repo.
 
-No department answers another's question. When a change doesn't fit one of the six questions, it
+No department answers another's question. When a change doesn't fit one of the seven questions, it
 probably belongs in a product repo's profile or in memory.
 
 The library and memory are easy to confuse. Memory is work state (what is in flight, who waits on what) and
 is meant to go stale. The library is what stays true if I left the job tomorrow, so employer and client
 detail never enters it.
+
+The grounds and the drawing office are easy to confuse too. The drawing office decides which hosting tier
+a product starts on and when it is promoted (recipe 24). The grounds are how the shared tier is built,
+backed up and restored. A product's *Release chain* says how that one app reaches it.
 
 ## What passes between them
 
@@ -37,6 +42,7 @@ flowchart LR
   lab[Lab<br/>harness-optimisation]
   plant[Plant<br/>machine-setup]
   library[Library<br/>brain]
+  grounds[Grounds<br/>platform]
 
   compass -- which problems are worth the time --> office
   office -- "brief (readiness: ready) + task plan" --> line
@@ -54,6 +60,10 @@ flowchart LR
   library -- read before researching --> office
   library -- read before researching --> line
   plant -- clones it, links /save and the pull hook --> library
+  office -- hosting tier and promotion trigger --> grounds
+  grounds -- app contract: what an app ships to join --> product
+  line -- released change, deployed to its host --> grounds
+  grounds -- lessons from runs, distilled --> library
 ```
 
 | From | To | What passes | Where it is written down |
@@ -68,23 +78,26 @@ flowchart LR
 | Plant | Everything | Both plugins enabled, rule files linked, every repo cloned at the same path, memory synced, the library cloned with `/save` linked | The plant's installer |
 | Line, Lab | Compass | Evidence: shipped work, and measured before-and-after | The manual's competency map |
 | Line, Lab, Compass | Library | A lesson that holds beyond one repo or job, distilled into one note, without employer detail | `/save`; the library's `AGENTS.md` |
+| Drawing office | Grounds | A product's hosting tier and the trigger that promotes it | Recipe 24, `docs/playbooks.md` *Stack profiles* |
+| Grounds | Product repos | The app contract: Dockerfile, `/health`, env-only config, migrations as a deploy step, auth on its own database | `platform/docs/app-contract.md` |
+| Grounds | Library | Why the platform is shaped the way it is, without instance detail | The library's hosting notes |
 | Library | Every session | What is already understood, so agents build on it instead of re-researching | The global `CLAUDE.md` pointer, which the plant installs |
 
 ## One grammar
 
-The same few rules repeat in every department, and that repetition is what makes six repos one system.
-Anyone who learns them in one repo can read the other five.
+The same few rules repeat in every department, and that repetition is what makes seven repos one system.
+Anyone who learns them in one repo can read the other six.
 
-| Rule | Compass | Drawing office | Line | Lab | Plant | Library |
-|---|:-:|:-:|:-:|:-:|:-:|:-:|
-| **Recipes are the authority.** Process lives in `recipes/`; improve the recipe, not the runner. | ● | ● | ● | ● | docs | |
-| **Skills are thin runners** over a recipe, shipped as a plugin. | | ● | ● | | installs | `/save`, linked |
-| **Gates refuse.** A missing input stops the run and names the fix. | rules | ● | ● | | doctor | |
-| **Earned lines only.** A rule exists because something went wrong once, and goes when it stops applying. | ● | gates | ● | ● | ● | |
-| **Dated, never rewritten.** A later decision supersedes by linking back. | ● | ● | traps | ● | | |
-| **Evidence over claims.** A number, a link or a digest. | ● | ● | ● | ● | doctor | sources |
-| **Generic here, local there.** Procedure in the repo, instance detail in a profile or a private file. | | ● | ● | ● | ● | ● |
-| **Humans authorise what leaves the room** (`authority.md`). | ● | ● | ● | ● | loads it | ● |
+| Rule | Compass | Drawing office | Line | Lab | Plant | Library | Grounds |
+|---|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **Recipes are the authority.** Process lives in `recipes/`; improve the recipe, not the runner. | ● | ● | ● | ● | docs | | after two runs |
+| **Skills are thin runners** over a recipe, shipped as a plugin. | | ● | ● | | installs | `/save`, linked | |
+| **Gates refuse.** A missing input stops the run and names the fix. | rules | ● | ● | | doctor | | app contract |
+| **Earned lines only.** A rule exists because something went wrong once, and goes when it stops applying. | ● | gates | ● | ● | ● | | ● |
+| **Dated, never rewritten.** A later decision supersedes by linking back. | ● | ● | traps | ● | | | run logs |
+| **Evidence over claims.** A number, a link or a digest. | ● | ● | ● | ● | doctor | sources | restore rehearsed |
+| **Generic here, local there.** Procedure in the repo, instance detail in a profile or a private file. | | ● | ● | ● | ● | ● | inventory |
+| **Humans authorise what leaves the room** (`authority.md`). | ● | ● | ● | ● | loads it | ● | ● |
 
 The plant loads `authority.md` into every session on the machine, so the three tiers apply in every
 repo, not only on the line.
@@ -121,3 +134,4 @@ The departments connected, in the order it happened over two days in September 2
 | A day starts, or an evening session | The compass's `rhythm.md` |
 | A month has passed | The compass's plan |
 | Something learned that should outlast the job | `/save`, into the library |
+| A product leaving managed hosting | `platform/docs/app-contract.md`, then a dated run in `platform/runs/` |
